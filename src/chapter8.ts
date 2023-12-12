@@ -24,38 +24,38 @@ type User = Admin | Member | Guest;
 // Guest : {name}님 현재까지 {visitCount}번 방문하셨습니다.
 
 function login(user: User) {
-  if (user.tag === "ADMIN") {
-    // ("kickCount" in user ) admin타입 -> 직관적이지는 x
-    console.log(`${user.name}님 현재까지 ${user.kickCount}명 강퇴했습니다`);
-  } else if (user.tag === "MEMBER") {
-    // member
-    console.log(`${user.name}님 현재까지 ${user.point}모았습니다`);
-  } else {
-    //guest
-    console.log(`${user.name}님 현재까지 ${user.visitCount}번 방문하셨습니다`);
-  }
-
-  // switch (user.tag) {
-  //   case "ADMIN": {
-  //     console.log(`${user.name}님 현재까지 ${user.kickCount}명 강퇴했습니다`);
-  //     break;
-  //   }
-  //   case "MEMBER": {
-  //     console.log(`${user.name}님 현재까지 ${user.point}모았습니다`);
-  //     break;
-  //   }
-  //   case "GUEST": {
-  //     console.log(
-  //       `${user.name}님 현재까지 ${user.visitCount}번 방문하셨습니다`
-  //     );
-  //     break;
-  //   }
+  // if (user.tag === "ADMIN") {
+  //   // ("kickCount" in user ) admin타입 -> 직관적이지는 x
+  //   console.log(`${user.name}님 현재까지 ${user.kickCount}명 강퇴했습니다`);
+  // } else if (user.tag === "MEMBER") {
+  //   // member
+  //   console.log(`${user.name}님 현재까지 ${user.point}모았습니다`);
+  // } else {
+  //   //guest
+  //   console.log(`${user.name}님 현재까지 ${user.visitCount}번 방문하셨습니다`);
   // }
+
+  switch (user.tag) {
+    case "ADMIN": {
+      console.log(`${user.name}님 현재까지 ${user.kickCount}명 강퇴했습니다`);
+      break;
+    }
+    case "MEMBER": {
+      console.log(`${user.name}님 현재까지 ${user.point}모았습니다`);
+      break;
+    }
+    case "GUEST": {
+      console.log(
+        `${user.name}님 현재까지 ${user.visitCount}번 방문하셨습니다`
+      );
+      break;
+    }
+  }
 }
 
 // 예제2 - 비동기 작업의 결과를 처리하는 객체
 
-// 옵셔널 체이닝이나 non null 단원 사용 시 안전한 코드가 아닐 때 어떻게 해야할까?
+// 옵셔널 체이닝이나 non null 단언 사용 시 안전한 코드가 아닐 때 어떻게 해야할까?
 type LoadingTask = {
   state: "LOADING";
 };
