@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "outDir": "dist",
+    "strict": true,
+    "moduleDetection": "force",
+    "moduleResolution": "node",
+    "allowJs": true
+  },
+  "ts-node": {
+    "esm": true
+  },
+  "include": ["src"]
+}
