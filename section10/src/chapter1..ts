@@ -26,25 +26,25 @@ const draft: Partial<Post> = {
 /* Required<T>>
 특정 객체 타입의 모든 프로퍼티를 필수 프로퍼티로 바꿔주는 타입*/
 
-const withThumbnailPost: Required<Post>f = {
+const withThumbnailPost: Required<Post> = {
   title: "typescript",
   tags: ["ts"],
   content: "",
+  thumbnailURL: "http://localhost", //주석처리하면 오류생김
 };
-
 
 /* Readonly<T>
 읽기전용 - 수정불가
 특정 객체 타입에서 모든 프로퍼티를 읽기전용 르포퍼티로 만들어주는 타입 */
 
 type Readonly<T> = {
-  readonly [ key in keyof T]: T[key];
-}
+  readonly [key in keyof T]: T[key];
+};
 
-const readonlyPost : Readonly<Post>  = {
-  title:"readonly",
-  tags:[],
-  content:"",
-}
+const readonlyPost: Readonly<Post> = {
+  title: "readonly",
+  tags: [],
+  content: "",
+};
 
-readonlyPost.content = ""
+// readonlyPost.content = ""
