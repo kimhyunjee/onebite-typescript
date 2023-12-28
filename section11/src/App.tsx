@@ -1,11 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import Editor from "./component/Editor";
-
-interface Todo {
-  id: number;
-  content: string;
-}
+import { Todo } from "./types";
+import TodoItem from "./component/TodoItem";
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -30,8 +27,11 @@ function App() {
     <div className="App">
       <h1>Todo</h1>
       <Editor onClickAdd={onClickAdd} />
-      {/* 처음에 오류가 뜨는데 Editor에서 props로 받을 타입 명시되어있지 않아서 */}
-      {/* <div>child</div> */}
+      <div>
+        {todos.map((todo) => (
+          <TodoItem key={todo.id} {...todo} />
+        ))}
+      </div>
     </div>
   );
 }
