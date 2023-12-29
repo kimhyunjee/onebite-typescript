@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
+import lodash from "lodash"; // type정보 가지고 있는 패키지 설치해야함
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 //const root = ReactDOM.createRoot(document.getElementById("root")as HTMLElement);
