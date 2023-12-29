@@ -1,4 +1,10 @@
-import React, { useEffect, useReducer, useRef, useState } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useReducer,
+  useRef,
+  useState,
+} from "react";
 import "./App.css";
 import Editor from "./component/Editor";
 import { Todo } from "./types";
@@ -29,6 +35,18 @@ function reducer(state: Todo[], action: Action) {
 }
 
 export const TodoStateContext = React.createContext<Todo[] | null>(null);
+export const TodoDispatchContext = React.createContext<{
+  onClickAdd: (text: string) => void;
+  onClickDelete: (id: number) => void;
+} | null>(null);
+
+// custom hoook
+// Editor.tsx 에서 dispatch마다 ?옵셔널체이닝 사용하는 것은 복잡함
+export function useTodoDispatch() {
+  const dispatch = useContext(TodoDispatchContext);
+  if (!dispatch) throw new Error("TodoDispatchContext에 문제가 있다");
+  return dispatch;
+}
 
 function App() {
   const [todos, dispatch] = useReducer(reducer, []);
@@ -60,12 +78,19 @@ function App() {
     <div className="App">
       <h1>Todo</h1>
       <TodoStateContext.Provider value={todos}>
-        <Editor onClickAdd={onClickAdd} />
-        <div>
-          {todos.map((todo) => (
-            <TodoItem key={todo.id} {...todo} onClickDelete={onClickDelete} />
-          ))}
-        </div>
+        <TodoDispatchContext.Provider
+          value={{
+            onClickAdd,
+            onClickDelete,
+          }}
+        >
+          <Editor />
+          <div>
+            {todos.map((todo) => (
+              <TodoItem key={todo.id} {...todo} />
+            ))}
+          </div>
+        </TodoDispatchContext.Provider>
       </TodoStateContext.Provider>
     </div>
   );
