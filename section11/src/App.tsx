@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useRef, useState } from "react";
+import React, { useEffect, useReducer, useRef, useState } from "react";
 import "./App.css";
 import Editor from "./component/Editor";
 import { Todo } from "./types";
@@ -27,6 +27,8 @@ function reducer(state: Todo[], action: Action) {
     }
   }
 }
+
+export const TodoStateContext = React.createContext<Todo[] | null>(null);
 
 function App() {
   const [todos, dispatch] = useReducer(reducer, []);
@@ -57,12 +59,14 @@ function App() {
   return (
     <div className="App">
       <h1>Todo</h1>
-      <Editor onClickAdd={onClickAdd} />
-      <div>
-        {todos.map((todo) => (
-          <TodoItem key={todo.id} {...todo} onClickDelete={onClickDelete} />
-        ))}
-      </div>
+      <TodoStateContext.Provider value={todos}>
+        <Editor onClickAdd={onClickAdd} />
+        <div>
+          {todos.map((todo) => (
+            <TodoItem key={todo.id} {...todo} onClickDelete={onClickDelete} />
+          ))}
+        </div>
+      </TodoStateContext.Provider>
     </div>
   );
 }
